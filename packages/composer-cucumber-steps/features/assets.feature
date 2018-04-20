@@ -276,6 +276,14 @@ Feature: Asset steps
             | assetId | booleanField | dateTimeField        | doubleField | integerField | longField |
             | abc     | true         | 1970-01-01T00:00:00Z | 3.14159     | 13           | 999999999 |
 
+    Scenario: I should handle false boolean primitive type in tables for assets
+        When I add the following asset of type org.acme.sample.SampleComplexAsset
+            | assetId | booleanField | dateTimeField        | doubleField | integerField | longField |
+            | def     |              | 1970-01-01T00:00:00Z | 3.14159     | 13           | 999999999 |
+        Then I should have the following assets of type org.acme.sample.SampleComplexAsset
+            | assetId | booleanField | dateTimeField        | doubleField | integerField | longField |
+            | def     | false        | 1970-01-01T00:00:00Z | 3.14159     | 13           | 999999999 |
+
     Scenario: I should get an error for non-primitive types in a table
         When I add the following asset of type org.acme.sample.SampleComplexAsset
             | assetId | booleanField | dateTimeField        | doubleField | integerField | longField | arrayField |
